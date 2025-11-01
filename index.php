@@ -62,16 +62,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <header class="left">
     <ul>
       <h1>
-        <span id="prenom">Mathieu Jin </span>
-        <br>
-        <span id="nom">Philippe Rastoul</span>
+        
+        <fieldset>
+  <legend>Select one of us</legend>
+        <div>
+    <input type="radio" id="mathieu" name="person" value="Mathieu" checked />
+    <label for="huey">Mathieu</label>
+  </div>
+  <div>
+    <input type="radio" id="philippe" name="person" value="Philippe"/>
+    <label for="dewey">Philippe</label>
+  </div>
+  </fieldset>
+
       </h1>
     </ul>
   </header>
 
   <main class="main">
+    <form method="POST">
+    <input type="hidden">
+    <label for="name">Name</label>
+    <input type="text" id="Name" name="name" placeholder="Your name.." required>
+    <label for="lname">Profile</label>
+    <input type="text" id="Profile" name="profile" placeholder="Your profile.." required >
+    <label for="pnumber">Experience</label>
+    <input type="text" id="Experience" name="experience" placeholder="Your experience.." required>
+    <label for="mail">Education</label>
+    <input type="text" id="Education" name="Education" placeholder="Your education.." required>
+    <label for="subject">Skills</label>
+    <input type="text" id="skills" name="Skills" placeholder="Your skills.." required>
+    <input type="submit" value="Submit">
+  </form>
   </main>
-
     <?php
       echo newbook(1);
     ?>
