@@ -1,23 +1,22 @@
 <?php
-include 'functions.php'; // Inclut le fichier avec la fonction
-
+include_once  'back.php';
 $message = "";
-
-// Vérifie quel formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['form_user'])) {
+        $imageData = file_get_contents($_FILES['picture']['tmp_name']);
+        $imageBase64 = 'data:' . $_FILES['picture']['type'] . ';base64,' . base64_encode($imageData);
         $fields = [
             'firstname'=> $_POST['firstname'],
             'lastname'=> $_POST['lastname'],
             'phone'=> $_POST['phone'],
-            ''=> $_POST[''],
+            'picture'=> $imageBase64,
             'email'=> $_POST['email']
         ];
         insertData('users', $fields);
     }
 
-    if (isset($_POST['form_experience'])) {
+    else if (isset($_POST['form_experience'])) {
         $fields = [
             'name' => $_POST['name'],
             'description' => $_POST['description'],
@@ -27,7 +26,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
         insertData('experience', $fields);
     }
-
+    else if (isset($_POST['form_education'])) {
+        $fields = [
+            'name' => $_POST['name'],
+            'description' => $_POST['description'],
+            'start_date' => $_POST['start_date'],
+            'end_date' => $_POST['end_date'],
+            'user_id' => $_POST['user_id']
+        ];
+        insertData('education', $fields);
+    }
+    else if (isset($_POST['form_skill'])) {
+        $fields = [
+            'name' => $_POST['name'],
+            'level' => $_POST['level'],
+            'user_id' => $_POST['user_id']
+        ];
+        insertData('skills', $fields);
+    }
 }
 ?>
 
@@ -57,9 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </main>
 
     <?php
-      include 'back.php'; 
       echo newbook(1);
-      
     ?>
     <footer class="right">
     <ul>

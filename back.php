@@ -1,15 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "cvdata";
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli('db', 'root', 'monpassword', 'cvdata');
+
+
 
 function insertData($table, $fields) {
     global $conn;
-    if ($conn->connect_error) die("Connexion échouée : " . $conn->connect_error);
-
-    // Colonnes et valeurs dynamiques
+    if ($conn->connect_error) die("Connexion échouée : " . $conn->connect_error);   
     $columns = implode(",", array_keys($fields));
     $values  = "'" . implode("','", array_values($fields)) . "'";
 
@@ -122,6 +118,25 @@ function show_education($id, $num){
             <li>" . $educations[$num - 1]['start_date'] . " - " . $educations[$num - 1]['end_date'] . "</li>
         </ul>";
 }
+function get_skills($id)
+{
+    global $conn;
+    $sql = "select * from skills where user_id = $id";
+    $result = mysqli_query($conn, $sql);
+    $rows = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $rows[] = $row;
+    }
+    return $rows;
+}
+function show_skills($id, $num){
+    $skills = get_skills($id);
+    return "<ul>
+            <li>" . $skills[$num - 1]['name'] . "</li>
+            <li>" . $skills[$num - 1]['level'] . "</li>
+        </ul>";
+}
+
 function num_users(){
     global $conn;
     $sql = "SELECT COUNT(*) as count FROM users";
@@ -131,7 +146,6 @@ function num_users(){
 }
 
 function newbook($id): string {
-    include_once 'back.php';
 
     $firstname = user_firstname($id);
     $lastname = user_lastname($id);
