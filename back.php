@@ -69,7 +69,6 @@ function user($id){
             <div class = 'user_name'>" 
               . user_firstname($id) . " " . user_lastname($id) . "
             </div>
-            <div class = 'user_picture'>" . user_picture($id) . "</div>
             <div class = 'user_phone'>" . user_phone($id) . "</div>
             <div class = 'user_email'>" . user_email($id) . "</div>
             
@@ -119,6 +118,14 @@ function show_education($id, $num){
             <li>" . $educations[$num - 1]['start_date'] . " - " . $educations[$num - 1]['end_date'] . "</li>
         </ul>";
 }
+function show_all_education($id){
+    $result = "<ul>";
+    for ($i = 1; $i <= count(get_education($id)); $i++) {
+        $result .= "<li>" . show_education($id, $i) . "</li>";
+    }
+    $result .= "</ul>";
+    return $result;
+}
 function get_skills($id)
 {
     global $conn;
@@ -130,14 +137,30 @@ function get_skills($id)
     }
     return $rows;
 }
+function level($level){
+  for ($i = 0; $i < 5; $i++) {
+      if ($i < $level) {
+          echo "★";
+      } else {
+          echo "☆";
+      }
+  }
+}
 function show_skills($id, $num){
     $skills = get_skills($id);
-    return "<ul>
-            <li>" . $skills[$num - 1]['name'] . "</li>
-            <li>" . $skills[$num - 1]['level'] . "</li>
-        </ul>";
+    return "
+            <p>" . $skills[$num - 1]['name'] . "</p>
+            <p>" . level($skills[$num - 1]['level']) . "</p>
+      ";
 }
-
+function show_all_skills($id){
+  $result = "<ul>";
+  for ($i = 1; $i <= count(get_skills($id)); $i++) {
+      $result .= "<li>" . show_skills($id, $i) . "</li>";
+  }
+  $result .= "</ul>";
+  return $result;
+}
 function num_users(){
     global $conn;
     $sql = "SELECT COUNT(*) as count FROM users";
@@ -147,11 +170,8 @@ function num_users(){
 }
 
 function newbook($id): string {
-
-    $firstname = user_firstname($id);
-    $lastname = user_lastname($id);
     $profile = user($id);
-
+    $img = user_picture($id);
     return "
     <div id='wrapper'>
       <div class='container'>
@@ -163,13 +183,14 @@ function newbook($id): string {
                 <div class='page-container'>
                   <div class='page left-page'>
                     <div>
-                      <p style='margin: 0; text-indent: 1rem'>
-                        <span id='prenom'>$firstname $lastname</span>
-                      </p>
+                      <p style='margin: 0;'>Profile</p><br>
+                      $profile
                     </div>
                   </div>
                   <div class='page right-page'>
-                    <div></div>
+                    <div>
+                      <img src='$img' alt='Profile Picture'>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -178,13 +199,12 @@ function newbook($id): string {
                 <div class='page-container'>
                   <div class='page left-page'>
                     <div>
-                      <p style='margin: 0;'>Profile</p><br>
-                      $profile
+                      <p style='margin: 0;'>Experiences</p><br>
                     </div>
                   </div>
                   <div class='page right-page'>
                     <div>
-                      <p style='margin: 0;'>Experiences</p>
+                      <p style='margin: 0;'></p>
                     </div>
                   </div>
                 </div>
@@ -199,13 +219,26 @@ function newbook($id): string {
                   </div>
                   <div class='page right-page'>
                     <div>
-                      <p style='margin: 0;'>Skills</p>
+                      <p style='margin: 0;'></p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class='carousel-item'></div>
+             <div class='carousel-item'>
+                <div class='page-container'>
+                  <div class='page left-page'>
+                    <div>
+                      <p style='margin: 0;'>Skills</p><br>
+                    </div>
+                  </div>
+                  <div class='page right-page'>
+                    <div>
+                      <p style='margin: 0;'></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

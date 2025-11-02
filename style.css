@@ -99,8 +99,10 @@
   list-style-type: none;
 }
 .user_profile{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  margin-left: 1rem;
+  flex-direction: column;
+  font-size: medium;
   gap: 1rem;
 }
   .container {
@@ -318,6 +320,9 @@
 }
 
 @media (width < 748px) {
+  body{
+    flex-direction: column;
+  }
   .container {
     --sprite-th: calc(var(--sprite-sh) / 2.5);
 
@@ -334,6 +339,9 @@
 }
 
 @media (width < 560px) {
+  body{
+    flex-direction: column;
+  }
   .container {
     --sprite-th: calc(var(--sprite-sh) / 4);
 

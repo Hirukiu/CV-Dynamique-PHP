@@ -32,7 +32,7 @@ else if ($user_id > num_users()) {
                       <div class='page left-page'>
                         <div>
                           <p style='margin: 0; text-indent: 1rem'>
-                            <span id='prenom'></span>
+                            <span id='prenom'>$firstname $lastname</span>
                           </p>
                         </div>
                       </div>
@@ -47,6 +47,7 @@ else if ($user_id > num_users()) {
                       <div class='page left-page'>
                         <div>
                           <p style='margin: 0;'>Profile</p><br>
+                          $profile
                         </div>
                       </div>
                       <div class='page right-page'>
