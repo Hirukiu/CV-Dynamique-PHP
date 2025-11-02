@@ -83,7 +83,26 @@
     inherits: false;
     initial-value: 0%;
   }
-
+  button {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    cursor: pointer; 
+    padding: 0;
+  }
+  button:hover {
+    text-decoration: underline;
+  }
+  ul, ol {
+  list-style-type: none;
+}
+.user_profile{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
   .container {
     display: flex;
     flex-direction: column;

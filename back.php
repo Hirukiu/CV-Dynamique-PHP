@@ -65,14 +65,15 @@ function user_picture($id){
     return '<img src="' . $row['picture'] . '" alt="Image">';
 }
 function user($id){
-    return"<ul>
-            <li>" . user_firstname($id) . "</li>
-            <li>" . user_lastname($id) . "</li>
-            <li>" . user_phone($id) . "</li>
-            <li>" . user_email($id) . "</li>
-            <li>" . user_picture($id) . "</li>
-        </ul>
-        ";
+    return"<div class = 'user_profile'>
+            <div class = 'user_name'>" 
+              . user_firstname($id) . " " . user_lastname($id) . "
+            </div>
+            <div class = 'user_picture'>" . user_picture($id) . "</div>
+            <div class = 'user_phone'>" . user_phone($id) . "</div>
+            <div class = 'user_email'>" . user_email($id) . "</div>
+            
+  </div>";
 }
 
 
