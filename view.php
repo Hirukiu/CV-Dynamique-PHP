@@ -16,7 +16,7 @@ else if ($user_id > num_users()) {
   <title>View CV</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class = "view">
   <header class="left">
     <h1>CV de <?= user_firstname($user_id) ?></h1>
   </header>
