@@ -16,18 +16,23 @@
     <header class="left">
       <ul>
         <h1>
-          <fieldset>
-            <legend>Select one of us</legend>
-            <form method="post">
-              <button type="submit" name="person" value="1" formaction="view.php?user_id=1">Voir Mathieu</button>
-              <button type="submit" name="person" value="2" formaction="view.php?user_id=2">Voir Philippe</button>
-            </form>
-          </fieldset>
+          Hello
         </h1>
       </ul>
     </header>
-    <main class="main">
-    </main>
+
+    <nav>
+      <fieldset>
+      <legend>Select an option</legend>
+      <form>
+        <button type="submit" name="user_id" value="1" formaction="view.php?user_id=1">Voir Mathieu</button>
+        <button type="submit" name="user_id" value="2" formaction="view.php?user_id=2">Voir Philippe</button>
+        <button type="submit" name="user_id" value="1" formaction="edit.php?user_id=1">Edit Mathieu</button>
+        <button type="submit" name="user_id" value="2" formaction="edit.php?user_id=2">Edit Philippe</button>
+      </form>
+      </fieldset>
+    </nav>
+
     <footer class="right">
       <ul>
         <li>

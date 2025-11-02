@@ -77,6 +77,17 @@ if (isset($_POST['create_user'])) {
 </head>
 
 <body>
+  <nav>
+      <fieldset>
+      <legend>Select an option</legend>
+      <form>
+        <button type="submit" name="user_id" value="1" formaction="view.php?user_id=1">Voir Mathieu</button>
+        <button type="submit" name="user_id" value="2" formaction="view.php?user_id=2">Voir Philippe</button>
+        <button type="submit" name="user_id" value="1" formaction="edit.php?user_id=1">Edit Mathieu</button>
+        <button type="submit" name="user_id" value="2" formaction="edit.php?user_id=2">Edit Philippe</button>
+      </form>
+      </fieldset>
+    </nav>
   <header class="left">
     <h1>
       <div class='choice'>
@@ -98,10 +109,23 @@ if (isset($_POST['create_user'])) {
                   <div class='page left-page'>
                     <div>
                       <h2>Create</h2>
+                      <form>
+                        <label for="fname">First name</label><br>
+                        <input type="text" id="fname" name="fname"><br>
+                        <label for="lname">Last name</label><br>
+                        <input type="text" id="lname" name="lname"><br>
+                        <label for="profile">Email</label><br>
+                        <input type="text" id="email" name="email"><br>
+                        <label for="phone">Phone</label><br>
+                        <input type="text" id="phone" name="phone"><br>
+                        <label for="profile">Picture</label><br>
+                        <input type="file" id="picture" name="picture"><br>
+                      </form>
                     </div>
                   </div>
                   <div class='page right-page'>
                     <div>
+                      
                     </div>
                   </div>
                 </div>
@@ -265,5 +289,7 @@ if (isset($_POST['create_user'])) {
   </main>
   <script src="java.js"></script>
 </body>
+
+
 
 </html>
