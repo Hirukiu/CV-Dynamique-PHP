@@ -7,9 +7,6 @@ function insertData($table, $fields)
 {
   global $conn;
   
-  if ($conn->connect_error)
-    die("Connexion échouée : " . $conn->connect_error);
-  
   $columns = implode(",", array_keys($fields));
   $values = "'" . implode("','", array_values($fields)) . "'";
 
@@ -18,16 +15,28 @@ function insertData($table, $fields)
   mysqli_query($conn, $sql);
 }
 
-function createnewuser($firstname, $lastname, $email, $phone, $picture)
-{
+function ModifData($table, $fields){
   global $conn;
-  
-  $sql = "INSERT INTO users (firstname, lastname, email, phone, picture) 
-            VALUES ('$firstname', '$lastname', '$email', '$phone', '$picture')";
 
-  
+  $setClause = [];
+  foreach ($fields as $column => $value) {
+    $setClause[] = "$column = '$value'";
+  }
+  $setString = implode(", ", $setClause);
+
+  $sql = "UPDATE $table SET $setString WHERE id = " . $fields['id'] . " and name = '" . $fields['name'] . "'";
+
   mysqli_query($conn, $sql);
 }
+
+function deleteData($table, $id, $name){
+  global $conn;
+
+  $sql = "DELETE FROM $table WHERE user_id = $id and name = '$name' LIMIT 1";
+
+  mysqli_query($conn, $sql);
+}
+
 
 function user_firstname($id)
 {
@@ -65,6 +74,14 @@ function user_phone($id)
     return $row['phone'];
   }
 }
+
+function fileToBase64($file) {
+    $image = file_get_contents($file['tmp_name']);
+    $mimeType = mime_content_type($file['tmp_name']);
+    $base64 = base64_encode($image);
+    return "data:$mimeType;base64,$base64";
+}
+
 function user_email($id)
 {
   global $conn;
@@ -118,7 +135,7 @@ function show_experience($id, $num)
   $experiences = get_experience($id);
   
   return "<div class='object'>
-            <div class='titleof'>" . $experiences[$num - 1]['name'] . "</div>
+            <div class='titleof'>". $experiences[$num - 1]['name'] . "</div>
             <div>" . $experiences[$num - 1]['start_date'] . " - " . $experiences[$num - 1]['end_date'] . "</div>
             <div>" . $experiences[$num - 1]['description'] . "</div>
         </div>";

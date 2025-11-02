@@ -9,9 +9,11 @@
     flex-direction: column;
     margin: 0;
 }
+
 header{
   margin-bottom: 3rem;
 }
+
 .choice{
   display: flex;
   flex-direction: column;
@@ -19,6 +21,7 @@ header{
   gap: 2rem;
   margin-bottom: 2rem;
 }
+
 @import url(https://fonts.googleapis.com/css?family=Crimson+Text:400,700,900,400italic,700italic,900italic|Playfair+Display:400,700,900,400italic,700italic,900italic|Rock+Salt:400);
 
 @font-face {
@@ -61,6 +64,8 @@ header{
   /* animation frame rate */
   --sprite-fr: 12;
 }
+
+
 
 @layer base {
   *{
@@ -329,6 +334,16 @@ header{
         }
       }
     }
+  }
+}
+.create, .update, .delete{
+  display: none;
+}
+
+.active{
+  display: block;
+  &::scroll-button(right) {
+    justify-self: flex-end;
   }
 }
 
