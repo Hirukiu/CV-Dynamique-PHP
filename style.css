@@ -5,7 +5,13 @@
 .main {
   width: 60%;
 }
-
+body{
+    flex-direction: column;
+    margin: 0;
+}
+header{
+  margin-bottom: 3rem;
+}
 @import url(https://fonts.googleapis.com/css?family=Crimson+Text:400,700,900,400italic,700italic,900italic|Playfair+Display:400,700,900,400italic,700italic,900italic|Rock+Salt:400);
 
 @font-face {
@@ -320,9 +326,6 @@
 }
 
 @media (width < 748px) {
-  body{
-    flex-direction: column;
-  }
   .container {
     --sprite-th: calc(var(--sprite-sh) / 2.5);
 
@@ -339,9 +342,7 @@
 }
 
 @media (width < 560px) {
-  body{
-    flex-direction: column;
-  }
+  
   .container {
     --sprite-th: calc(var(--sprite-sh) / 4);
 
