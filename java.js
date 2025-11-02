@@ -10,3 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+const items = document.querySelectorAll('.carousel-item');
+const carousel = document.querySelector('.carousel');
+
+carousel.addEventListener('scroll', () => {
+  let activeIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
+  items.forEach((item, index) => {
+    item.classList.toggle('active', index === activeIndex);
+  });
+});
