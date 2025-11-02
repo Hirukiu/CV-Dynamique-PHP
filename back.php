@@ -46,11 +46,17 @@ function modif_user($fields, $id)
 
   mysqli_query($conn, $sql);
 }
-function deleteUser($id)
-{
-  global $conn;
-  $sql = "DELETE FROM users WHERE id = $id";
-  mysqli_query($conn, $sql);
+function deleteUser($id) {
+    global $conn;
+
+    if (!canDeleteUser($id)) {
+      echo "tu peut pas supprimer";
+        return false; 
+    }
+
+    $sql = "DELETE FROM users WHERE id = $id";
+    mysqli_query($conn, $sql);
+    return true;
 }
 function deleteData($table, $id, $name)
 {
@@ -58,7 +64,21 @@ function deleteData($table, $id, $name)
   $sql = "DELETE FROM $table WHERE user_id = $id AND name = '$name' LIMIT 1";
   mysqli_query($conn, $sql);
 }
+function canDeleteUser($user_id) {
+    global $conn;
 
+    $tables = ['experience', 'education', 'skills'];
+    foreach ($tables as $table) {
+        $sql = "SELECT COUNT(*) as count FROM $table WHERE user_id = $user_id";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        if ($row['count'] > 0) {
+            return false;
+        }
+    }
+
+    return true; 
+}
 
 function user_firstname($id)
 {
