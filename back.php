@@ -29,7 +29,7 @@ function ModifData($table, $fields)
 
   $sql = "UPDATE $table SET $setString WHERE user_id = " . $fields['user_id'] . " and name = '" . $fields['name'] . "'";
 
-  mysqli_query($conn, $sql);
+  mysqli_query( $conn, $sql);
 }
 
 function modif_user($fields, $id)
